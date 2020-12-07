@@ -10,7 +10,7 @@ namespace IDP_Back_End.Controllers
     public class Chat : Controller
     {
         // GET the Chat feed. This endpoint returns the connection for the chat.
-        public ActionResult ChatConnection()
+        public ActionResult Index()
         {
             return View();
         }
