@@ -13,6 +13,9 @@ using IDP_Back_End.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using IDP_Back_End.Models;
+using IDP_Back_End.Repository.Implementation;
+using IDP_Back_End.ChatHubs;
+using IDP_Back_End.Repository.Interface;
 
 namespace IDP_Back_End
 {
@@ -38,6 +41,9 @@ namespace IDP_Back_End
         {
             services.AddControllersWithViews();
 
+            // Adding SignalR
+            services.AddSignalR();
+
             // Adding JWT as authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
@@ -53,11 +59,12 @@ namespace IDP_Back_End
             });
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IChatRepository, ChatRepository>();
 
             if (_env.IsDevelopment())
             {
                 services.AddDbContext<DBContext>(
-                     opt => opt.UseSqlite("Data Source=BiCDatabase.db"));
+                     opt => opt.UseSqlite("Data Source=DevDB.db"));
             }
             else if (_env.IsProduction())
             {
@@ -77,10 +84,7 @@ namespace IDP_Back_End
                 {
                     DBContext ctx = scope.ServiceProvider.GetService<DBContext>();
                     ctx.Database.EnsureCreated();
-                    /*
-                     * TODO Create File to Seed DB with Data for testing
                     DBInit.SeedDB(ctx);
-                    */
                 }
             }
             else
@@ -103,6 +107,13 @@ namespace IDP_Back_End
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/chathub");
+
+                endpoints.MapControllerRoute(
+                    name: null,
+                    pattern: "chat",
+                    defaults: new { controller = "Chat", action = "Index" });
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

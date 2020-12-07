@@ -13,6 +13,7 @@ namespace IDP_Back_End.Repository
         //READ
         User GetUserById(int id);
         User GetUserByUserName(string name);
+        List<string> GatAllUserNames(string name);
         //UPDATE
         User UpdateUser(User userUpdate);
         //DELETE

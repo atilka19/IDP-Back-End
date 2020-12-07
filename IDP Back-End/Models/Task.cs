@@ -22,8 +22,8 @@ namespace IDP_Back_End.Models
         // All other Data
         public string Title { get; set; }
         public string Description { get; set; }
+        public int NumberOfCheckListItems { get; set; }
         public DateTime TimeCreated { get; set; }
-        public DateTime DeadLine { get; set; }
         public bool Done { get; set; }
     }
 }

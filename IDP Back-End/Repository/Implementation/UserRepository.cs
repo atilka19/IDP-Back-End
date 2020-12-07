@@ -60,6 +60,20 @@ namespace IDP_Back_End.Repository.Implementation
             return _ctx.Users.FirstOrDefault(u => u.UserName == name);
         }
 
+        // Returns a list of all the usernames in the db
+        public List<string> GatAllUserNames(string name)
+        {
+            var names = new List<string>();
+            var users = _ctx.Users.ToList();
+
+            foreach(User user in users)
+            {
+                names.Add(user.UserName);
+            }
+
+            return names;
+        }
+
         public User UpdateUser(User userUpdate)
         {
             throw new NotImplementedException();
@@ -67,6 +81,7 @@ namespace IDP_Back_End.Repository.Implementation
 
 
         // Hashing stuff
+        // Used to create hash value out of input
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
@@ -77,6 +92,7 @@ namespace IDP_Back_End.Repository.Implementation
             }
         }
 
+        // Used to check the input password against hased pw in Database
         public bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
         {
             //Applying the stored key to the chosen Crypt, if the wrong key is used different hash will be the result

@@ -13,7 +13,7 @@ namespace IDP_Back_End.Models
         public Task Task { get; set; }
 
         // Other Data
-        public string Title { get; set; }
+        public string Text { get; set; }
         public bool Done { get; set; }
     }
 }
