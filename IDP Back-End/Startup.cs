@@ -17,6 +17,9 @@ using IDP_Back_End.Repository.Implementation;
 using IDP_Back_End.ChatHubs;
 using IDP_Back_End.Repository.Interface;
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+
 namespace IDP_Back_End
 {
     public class Startup
@@ -39,7 +42,8 @@ namespace IDP_Back_End
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             // Adding SignalR
             services.AddSignalR();
@@ -58,8 +62,13 @@ namespace IDP_Back_End
                 };
             });
 
+            services.AddMvc();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IChatRepository, ChatRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<ICheckItemRepository, CheckItemRepository>();
 
             if (_env.IsDevelopment())
             {
@@ -112,7 +121,12 @@ namespace IDP_Back_End
                 endpoints.MapControllerRoute(
                     name: null,
                     pattern: "chat",
-                    defaults: new { controller = "Chat", action = "Index" });
+                    defaults: new { controller = "Chat", action = "ChatConnection" });
+
+                endpoints.MapControllerRoute(
+                    name: null,
+                    pattern: "category",
+                    defaults: new { controller = "CategoryController", action = "Index" });
 
                 endpoints.MapControllerRoute(
                     name: "default",

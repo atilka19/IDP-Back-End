@@ -51,7 +51,7 @@ namespace IDP_Back_End.Repository.Implementation
         public List<Task> GetAllTasksInCategory(string Category)
         {
             return _ctx.Tasks
-                .Include(t => t.CheckListItems)
+                .Include(t => t.TaskOf)
                 .Where(t => t.Category.Title == Category).ToList();
         }
 
@@ -60,7 +60,7 @@ namespace IDP_Back_End.Repository.Implementation
             var task = _ctx.Tasks
                       .Include(t => t.CheckListItems)
                       .Include(t => t.Comments)
-                      // Might not use the 2 next ones, depending on Front-end implementation, will leave it here for now.
+                      // Might not use the next 2, depending on Front-end implementation, will leave it here for now.
                       .Include(t => t.CreatedBy)
                       .Include(t => t.TaskOf)
                       .FirstOrDefault(t => t.ID == ID);
