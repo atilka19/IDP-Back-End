@@ -1,0 +1,12 @@
+﻿@model IDP_Back_End.Models.Comment
+@using IDP_Back_End.Models;
+
+<div class="commentContainer" style="margin: 10px">
+    <div class="userNameContainer">
+        <strong>@Model.User.UserName</strong> <br />
+        @Model.TimePosted.ToString();
+    </div>
+    <div class="textContainer">
+        @Model.Text
+    </div>
+</div>

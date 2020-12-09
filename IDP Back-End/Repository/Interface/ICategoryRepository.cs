@@ -9,7 +9,7 @@ namespace IDP_Back_End.Repository.Interface
     public interface ICategoryRepository
     {
         // READ
-        List<string> GetCategoryNames();
+        List<TaskCategory> GetAllCategorries();
         TaskCategory GetCategoryByID(int ID); 
 
         // CREATE

@@ -42,8 +42,9 @@ namespace IDP_Back_End
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Fixing JSON reference loops so fetching data doesn't break the site
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
-                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             // Adding SignalR
             services.AddSignalR();
@@ -86,6 +87,7 @@ namespace IDP_Back_End
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("AllowAnyOrigin");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -116,21 +118,32 @@ namespace IDP_Back_End
 
             app.UseEndpoints(endpoints =>
             {
+
                 endpoints.MapHub<ChatHub>("/chathub");
-
-                endpoints.MapControllerRoute(
-                    name: null,
-                    pattern: "chat",
-                    defaults: new { controller = "Chat", action = "ChatConnection" });
-
-                endpoints.MapControllerRoute(
-                    name: null,
-                    pattern: "category",
-                    defaults: new { controller = "CategoryController", action = "Index" });
 
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: null,
+                    pattern: "Chat",
+                    defaults: new { controller = "Chat", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    name: null,
+                    pattern: "task/{id}",
+                    defaults: new { controller = "Tasks", action = "TaskById" });
+
+                endpoints.MapControllerRoute(
+                    name: null,
+                    pattern: "login",
+                    defaults: new { controller = "Login", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    name: null,
+                    pattern: "Category",
+                    defaults: new { controller = "Category", action = "Index" });
             });
         }
     }

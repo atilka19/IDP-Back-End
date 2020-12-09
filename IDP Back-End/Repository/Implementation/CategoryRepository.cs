@@ -33,6 +33,14 @@ namespace IDP_Back_End.Repository.Implementation
             _ctx.SaveChanges();
         }
 
+        public List<TaskCategory> GetAllCategorries()
+        {
+            var auc = _ctx.Categories
+                      .Include(c => c.Tasks).ThenInclude(t => t.TaskOf)
+                      .ToList();
+            return auc;
+        }
+
         public TaskCategory GetCategoryByID(int ID)
         {
             var auc = _ctx.Categories

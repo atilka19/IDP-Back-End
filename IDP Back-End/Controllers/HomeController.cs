@@ -6,21 +6,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using IDP_Back_End.Models;
+using IDP_Back_End.Repository.Interface;
 
 namespace IDP_Back_End.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICategoryRepository _repo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICategoryRepository _catRepo)
         {
             _logger = logger;
+            _repo = _catRepo;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var categories = _repo.GetAllCategorries();
+            return View(categories);
         }
 
         public IActionResult Privacy()

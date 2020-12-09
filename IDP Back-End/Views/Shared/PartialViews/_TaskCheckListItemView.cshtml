@@ -1,0 +1,9 @@
+﻿@model IDP_Back_End.Models.CheckListItem
+@using IDP_Back_End.Models;
+
+<div class="row" style="margin: 10px">
+    <div class="col-md-4">
+        <strong>@Model.Text</strong>
+        <input type="checkbox" id="done" name="done" checked="@Model.Done">
+    </div>
+</div>

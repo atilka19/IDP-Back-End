@@ -1,0 +1,35 @@
+﻿<div class="mainContainer">
+    <script>
+
+        // Gonna finish this up properly and make it pretty
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://localhost:44397/api/Auth");
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+            username: "admin",
+            password: "aztamindenit1"
+        }));
+        xhr.onreadystatechange = function () {
+            if (this.readyState != 4) return;
+
+            if (this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                window.localStorage.setItem('currentUser', JSON.stringify(
+                    { username: data.username, token: data.token, isAdmin: data.isAdmin }));
+                console.log(data);
+                // we get the returned data
+            }
+
+            // end of state change: it can be after some time (async)
+        };
+    </script>
+    <form onsubmit="login()">
+        <input type="text" name="username" />
+        <br />
+        <input type="text" name="password" />
+        <br />
+        <button type="submit">Submit</button>
+    </form>
+
+    <script src="./js/Auth.js"></script>
+</div>

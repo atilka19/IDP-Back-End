@@ -2,43 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IDP_Back_End.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IDP_Back_End.Controllers
 {
-    public class TasksController : Controller
+    public class LoginController : Controller
     {
-        private readonly ITaskRepository _repo;
-
-        public TasksController(ITaskRepository taskRepository)
-        {
-            _repo = taskRepository;
-        }
-
-        // GET: TasksController
-        public IActionResult Index()
+        // GET: LoginController
+        public ActionResult Index()
         {
             return View();
         }
 
-        // GET: TasksController/Details/5
-
-        public IActionResult TaskById(int taskID)
+        // GET: LoginController/Details/5
+        public ActionResult Details(int id)
         {
-            var task = _repo.GetTaskByID(taskID);
-            return View("PartialViews/_SingleTaskView", task);
+            return View();
         }
 
-        // GET: TasksController/Create
+        // GET: LoginController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: TasksController/Create
+        // POST: LoginController/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
         {
             try
@@ -51,14 +42,15 @@ namespace IDP_Back_End.Controllers
             }
         }
 
-        // GET: TasksController/Edit/5
+        // GET: LoginController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: TasksController/Edit/5
+        // POST: LoginController/Edit/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
         {
             try
@@ -71,14 +63,15 @@ namespace IDP_Back_End.Controllers
             }
         }
 
-        // GET: TasksController/Delete/5
+        // GET: LoginController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: TasksController/Delete/5
+        // POST: LoginController/Delete/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
             try

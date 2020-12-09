@@ -8,7 +8,6 @@ namespace IDP_Back_End.Repository.Interface
     public interface ITaskRepository
     {
         // READ
-        List<Task> GetAllTasksInCategory(string Category);
         Task GetTaskByID(int ID);
         // CREATE
         Task CreateTask(string title, string description, int categoryID, string createdBy, string taskOf);

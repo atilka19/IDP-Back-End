@@ -48,13 +48,6 @@ namespace IDP_Back_End.Repository.Implementation
             _ctx.SaveChanges();
         }
 
-        public List<Task> GetAllTasksInCategory(string Category)
-        {
-            return _ctx.Tasks
-                .Include(t => t.TaskOf)
-                .Where(t => t.Category.Title == Category).ToList();
-        }
-
         public Task GetTaskByID(int ID)
         {
             var task = _ctx.Tasks

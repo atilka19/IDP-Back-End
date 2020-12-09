@@ -1,8 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@model List<TaskCategory>
+@using IDP_Back_End.Models;
+@foreach (TaskCategory category in Model)
+{
+    <div class="categoryContainer" style="margin: 10px; border: solid gray 2px">
+        <h2><strong>@category.Title</strong></h2>
+        <div class="tasksContainer">
+            @foreach (IDP_Back_End.Models.Task task in category.Tasks)
+            {
+                @await Html.PartialAsync("PartialViews/_TaskInCategoryView", task);
+            }
+        </div>
+    </div>
+}

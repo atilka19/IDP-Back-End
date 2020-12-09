@@ -104,7 +104,8 @@ namespace IDP_Back_End.Repository
                 CreatedBy = user1,
                 CheckListItems = new List<CheckListItem>(),
                 Comments = new List<Comment>(),
-                TimeCreated = DateTime.UtcNow
+                TimeCreated = DateTime.UtcNow,
+                Done = true
             }).Entity;
             var task1 = ctx.Tasks.Add(new Task() {
                 Title = "Create the sky that we need to look at.",
@@ -113,7 +114,8 @@ namespace IDP_Back_End.Repository
                 CreatedBy = user1,
                 CheckListItems = new List<CheckListItem>(),
                 Comments = new List<Comment>(),
-                TimeCreated = DateTime.UtcNow
+                TimeCreated = DateTime.UtcNow,
+                Done = true
             }).Entity;
             var task2 = ctx.Tasks.Add(new Task() {
                 Title = "Do something for fun",
@@ -122,9 +124,12 @@ namespace IDP_Back_End.Repository
                 CreatedBy = user0,
                 CheckListItems = new List<CheckListItem>(),
                 Comments = new List<Comment>(),
-                TimeCreated = DateTime.UtcNow
+                TimeCreated = DateTime.UtcNow,
+                Done = true
             }).Entity;
 
+
+            // Adding connections of the models to eachother
             task0.CheckListItems.Add(cli0);
             task0.CheckListItems.Add(cli1);
             task1.CheckListItems.Add(cli2);
