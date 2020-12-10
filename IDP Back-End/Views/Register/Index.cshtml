@@ -1,13 +1,21 @@
-﻿<div class="mainContainer">
-    <h2>Register</h2>
-    <form>
-        <input type="text" name="username" />
-        <br />
-        <input type="text" name="password" />
-        <br />
-        <input type="button" value="Submit" onclick="register(this.form)" />
-        <a href="/Login"><input type="button" value="Back" /></a>
-    </form>
+﻿@{ Layout = null; }
 
-    <script src="./js/Auth.js"></script>
+<link href="~/css/Stylingsite.css" rel="stylesheet" />
+
+<div class="Login_MainContainer">
+    
+    <form class="login_loginbox">
+        <h2>Register</h2>
+        What your username want to be: <br />
+        <input type="text" name="username" class="login_loginbox--textbox" />
+        <br />
+        What your password want to be:<br />
+        <input type="text" name="password" class="login_loginbox--textbox" />
+        <br /><br />
+        <input type="button" value="Submit" onclick="register(this.form)" class="login_loginbox--bottom" />
+        <a href="/Login"><input type="button" value="Back" class="login_loginbox--bottom" /></a>
+            <script src="./js/Auth.js"></script>
+</form>
+
+    
 </div>
