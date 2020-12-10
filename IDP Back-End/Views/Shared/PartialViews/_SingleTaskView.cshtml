@@ -1,29 +1,38 @@
 ﻿@model IDP_Back_End.Models.Task
 @using IDP_Back_End.Models;
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Task Viewer</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/taskViewer.css" />
+</head>
+<body>
+    <div class="task-view">
+        <h2><strong>@Model.Title</strong></h2>
+        <div class="descriptionContainer">
+            @Model.Description
+        </div>
+        <div class="usersContainer">
+            <strong>Created By: </strong>@Model.CreatedBy.UserName
+            <strong>Task of: </strong>@Model.TaskOf.UserName
+        </div>
 
-<div class="taskContainer" style="margin: 10px">
-    <h2><strong>@Model.Title</strong></h2>
-    <div class="descriptionContainer">
-        @Model.Description
-    </div>
-    <div class="usersContainer">
-        <strong>Created By: </strong>@Model.CreatedBy.UserName
-        <strong>Task of: </strong>@Model.TaskOf.UserName
-    </div>
+        <h3><strong>Checklist</strong></h3>
+        <div class="checkListContainer" style="margin: 10px; border: solid gray 2px">
+            @foreach (CheckListItem cli in Model.CheckListItems)
+            {
+                @await Html.PartialAsync("PartialViews/_TaskCheckListItemView", cli);
+            }
+        </div>
 
-    <h3><strong>Checklist</strong></h3>
-    <div class="checkListContainer" style="margin: 10px; border: solid gray 2px">
-        @foreach (CheckListItem cli in Model.CheckListItems)
-        {
-            @await Html.PartialAsync("PartialViews/_TaskCheckListItemView", cli);
-        }
+        <h3><strong>Comments</strong></h3>
+        <div class="commentsContainer" style="margin: 10px; border: solid gray 2px">
+            @foreach (Comment comment in Model.Comments)
+            {
+                @await Html.PartialAsync("PartialViews/_TaskCommentView", comment);
+            }
+        </div>
     </div>
-
-    <h3><strong>Comments</strong></h3>
-    <div class="commentsContainer" style="margin: 10px; border: solid gray 2px">
-        @foreach (Comment comment in Model.Comments)
-        {
-            @await Html.PartialAsync("PartialViews/_TaskCommentView", comment);
-        }
-    </div>
-</div>
+</body>

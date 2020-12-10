@@ -1,0 +1,14 @@
+﻿/* Title and desc */
+
+.task-view {
+    position: relative;
+    padding: 1rem;
+    margin: 20px;
+    border-radius: 11px;
+    width: 100%;
+    background-color: rgba(196, 196, 196, 1);
+}
+
+/* Checklist */
+
+/* Comments */
