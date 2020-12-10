@@ -12,11 +12,13 @@ namespace IDP_Back_End.Repository.Implementation
     public class CommentRepository : ICommentRepository
     {
         private readonly DBContext _ctx;
+        private readonly ITaskRepository _taskRepo;
 
         // Dependency Injection
-        public CommentRepository(DBContext ctx)
+        public CommentRepository(DBContext ctx, ITaskRepository taskRepo)
         {
             _ctx = ctx;
+            _taskRepo = taskRepo;
         }
 
         public Models.Task CreateCommentAddToTask(int taskID, string text, string userName)
@@ -27,12 +29,12 @@ namespace IDP_Back_End.Repository.Implementation
                 throw new InvalidDataException("User does not exist!");
             }
 
-            var task = _ctx.Tasks.FirstOrDefault(t => t.ID == taskID);
+            var task = _taskRepo.GetTaskByID(taskID);
             if (task == null)
             {
                 throw new InvalidDataException("Requested Task does not exist!");
             }
-            task.Comments.Add(new Comment() {Text = text, User = user, TimePosted = new DateTime()});
+            task.Comments.Add(new Comment() {Text = text, User = user, TimePosted = DateTime.Now});
 
             _ctx.Attach(task).State = EntityState.Modified;
             _ctx.SaveChanges();

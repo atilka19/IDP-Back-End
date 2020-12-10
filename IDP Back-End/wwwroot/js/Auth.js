@@ -47,11 +47,14 @@ function checkToken() {
     }
     
 }
-function getUserName() {
-    var token = JSON.parse(localStorage.getItem('currentUser'));
-    console.log("Get hit!!");
-    return token.username;
+function appendUserName(formID, fieldID) {
+    document.getElementById(formID).onsubmit = function () {
+        var txt = document.getElementById(fieldID);
+        txt.value = this.getUserName();
+        console.log("gotten username");
+    };
 }
+
 //function checkToken() {
 //    var xhr = new XMLHttpRequest();
 //    var token = JSON.parse(localStorage.getItem('currentUser'));

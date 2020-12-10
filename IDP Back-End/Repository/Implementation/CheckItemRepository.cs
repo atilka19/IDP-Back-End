@@ -12,16 +12,18 @@ namespace IDP_Back_End.Repository.Implementation
     public class CheckItemRepository : ICheckItemRepository
     {
         private readonly DBContext _ctx;
+        private readonly ITaskRepository _taskRepo;
 
         // Dependency Injection
-        public CheckItemRepository(DBContext ctx)
+        public CheckItemRepository(DBContext ctx, ITaskRepository taskRepo)
         {
             _ctx = ctx;
+            _taskRepo = taskRepo;
         }
 
-        public void CreateNewListItemAddToTask(int taskID, string text)
+        public Models.Task CreateNewListItemAddToTask(int taskID, string text)
         {
-            var task = _ctx.Tasks.FirstOrDefault(t => t.ID == taskID);
+            var task = _taskRepo.GetTaskByID(taskID);
             if (task == null)
             {
                 throw new InvalidDataException("Requested Task does not exist!");
@@ -30,6 +32,8 @@ namespace IDP_Back_End.Repository.Implementation
 
             _ctx.Attach(task).State = EntityState.Modified;
             _ctx.SaveChanges();
+
+            return task;
         }
 
         public void CheckListItemDone(int ID)

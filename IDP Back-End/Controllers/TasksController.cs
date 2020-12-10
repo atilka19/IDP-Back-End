@@ -57,10 +57,10 @@ namespace IDP_Back_End.Controllers
         }
 
         // GET: TasksController/Create
-        public RedirectToActionResult AddCheckListToTask(int taskId, string text)
+        public IActionResult AddCheckListToTask(int taskId, string text)
         {
-            _checkListRepo.CreateNewListItemAddToTask(taskId, text);
-            return RedirectToAction("TaskById/" + taskId, "Tasks", new { area = "" });
+            var task = _checkListRepo.CreateNewListItemAddToTask(taskId, text);
+            return View("PartialViews/_SingleTaskView", task);
         }
 
         // GET: TasksController/Edit/5

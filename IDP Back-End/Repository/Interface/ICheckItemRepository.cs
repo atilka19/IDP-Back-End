@@ -9,7 +9,7 @@ namespace IDP_Back_End.Repository.Interface
     public interface ICheckItemRepository
     {
         // CREATE
-        void CreateNewListItemAddToTask(int taskID, string text);
+        Models.Task CreateNewListItemAddToTask(int taskID, string text);
         // UPDATE
         void CheckListItemDone(int ID);
         void UpdateCheckListItemText(int ID, string newText);
