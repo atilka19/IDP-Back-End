@@ -21,11 +21,13 @@ namespace IDP_Back_End.Controllers
         }
 
         [HttpGet]
-        // Nothing is needed inside code block cause Authorize tag will trow "Unauthorized" error if no token header is present
-        // The catch error should also never happen because of this, only kept it there because it might catch other error such as hosting or cors
+        // I was unable to get this god forsaken tag working... I would just get 401 with the correct headers no matter how I sent them
+        // I'm pretty sure implementation is correct, but it's probably for some different version of ASP.net than what we're using.....
         [Authorize]
         public ActionResult<bool> Get()
         {
+            // Nothing is needed inside code block cause Authorize tag will trow "Unauthorized" error if no token header is present
+            // The catch error should also never happen because of this, only kept it there because it might catch other error such as hosting or cors
             try
             {
                 return Ok(true);

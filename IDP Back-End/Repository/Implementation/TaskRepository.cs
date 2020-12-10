@@ -17,6 +17,31 @@ namespace IDP_Back_End.Repository.Implementation
             _ctx = ctx;
         }
 
+        public Task AddNewTask(string title, string createdBy)
+        {
+            var newTask = new Task();
+            var user = _ctx.Users.FirstOrDefault(u => u.UserName == createdBy);
+            newTask.Title = title;
+            newTask.CreatedBy = user;
+
+            _ctx.Attach(newTask).State = EntityState.Added;
+            _ctx.SaveChanges();
+            return newTask;
+        }
+
+        public Task AddUserToTask(int id, string taskOf)
+        {
+            var task = _ctx.Tasks.FirstOrDefault(t => t.ID == id);
+            var user = _ctx.Users.FirstOrDefault(u => u.UserName == taskOf);
+
+            task.TaskOf = user;
+
+            _ctx.Attach(task).State = EntityState.Modified;
+            _ctx.SaveChanges();
+
+            return task;
+        }
+
         public Task CreateTask(string title, string description, int categoryID, string createdBy, string taskOf)
         {
             var newTask = new Task();

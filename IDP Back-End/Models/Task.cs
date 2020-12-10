@@ -10,7 +10,7 @@ namespace IDP_Back_End.Models
         public int ID { get; set; } // PK
         public int CategoryID { get; set; } // Category FK
         public int CreatedByID { get; set; } // User that Created the Task FK
-        public int TaskOfID { get; set; } // User that should do the Task FK
+        public int? TaskOfID { get; set; } // User that should do the Task FK
 
         // Entity Framework Stuff
         public List<Comment> Comments { get; set; }

@@ -47,6 +47,11 @@ function checkToken() {
     }
     
 }
+function getUserName() {
+    var token = JSON.parse(localStorage.getItem('currentUser'));
+    console.log("Get hit!!");
+    return token.username;
+}
 //function checkToken() {
 //    var xhr = new XMLHttpRequest();
 //    var token = JSON.parse(localStorage.getItem('currentUser'));
@@ -74,61 +79,6 @@ function checkToken() {
 //        console.error(error.message);
 //    });
 //    console.log(request);
-//}
-
-//function checkToken() {
-//    var token = JSON.parse(localStorage.getItem('currentUser'));
-//    var currentUrl = window.location.href;
-//    var xhr = new XMLHttpRequest();
-//    // Checking the current url and setting call to correct one, needed cause default home has 2 endpoints
-//    //if (currentUrl.indexOf("Home") !== -1 || currentUrl.indexOf("home") !== -1) {
-//    //    if (currentUrl.indexOf("Home") !== -1) {
-//    //        requestUrl = currentUrl.replace("Home", "api/Auth");
-//    //    } else {
-//    //        requestUrl = currentUrl.replace("home", "api/Auth");
-//    //    }
-//    //} else {
-//    //    requestUrl = currentUrl + "api/Auth";
-//    //}
-//            // Checking the current url and setting call to correct one, needed cause default home has 2 endpoints
-//    if (currentUrl.indexOf("Home") !== -1 || currentUrl.indexOf("home") !== -1) {
-//        if (currentUrl.indexOf("Home") !== -1) {
-//            xhr.open("GET", currentUrl.replace("Home", "api/Auth"));
-//        } else {
-//            xhr.open("GET", currentUrl.replace("home", "api/Auth"));
-//        }
-//    } else {
-//        xhr.open("GET", currentUrl + "api/Auth");
-//    }
-
-//    xhr.setRequestHeader('Content-Type', 'application/json');
-//    xhr.setRequestHeader("Authorization", "Bearer " + token && token.token);
-//    console.log(xhr)
-//    console.log(token)
-//    xhr.send();
-//    xhr.onreadystatechange = function () {
-//        if (this.readyState != 4) return;
-
-//        if (this.status == 200) {
-
-//            // If response was OK, everything is fine, no need to disturb user
-//            console.log("Cookie accepted");
-//        } else {
-//            // If resonse was not OK, navigate to login screen
-
-//            window.alert("You need to be logged in to see this site");
-
-//            //if (currentUrl.indexOf("Home") !== -1 || currentUrl.indexOf("home") !== -1) {
-//            //    if (currentUrl.indexOf("Home") !== -1) {
-//            //        window.location.href =  currentUrl.replace("Home", "login");
-//            //    } else {
-//            //        window.location.href =  currentUrl.replace("home", "login");
-//            //    }
-//            //} else {
-//            //    window.location.href =  currentUrl + "login";
-//            //}
-//        }
-//    };
 //}
 function register(form) {
     var xhr = new XMLHttpRequest();

@@ -9,7 +9,7 @@ namespace IDP_Back_End.Repository.Interface
     public interface ICommentRepository
     {
         // CREATE
-        void CreateCommentAddToTask(int taskID, string text, string userName);
+        Models.Task CreateCommentAddToTask(int taskID, string text, string userName);
         // DELETE
         void DeleteComment(int ID);
 

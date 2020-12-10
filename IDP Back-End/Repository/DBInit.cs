@@ -110,7 +110,6 @@ namespace IDP_Back_End.Repository
             var task1 = ctx.Tasks.Add(new Task() {
                 Title = "Create the sky that we need to look at.",
                 Description = "I think this one if pretty self explanitory....",
-                TaskOf = user1,
                 CreatedBy = user1,
                 CheckListItems = new List<CheckListItem>(),
                 Comments = new List<Comment>(),

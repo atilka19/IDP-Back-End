@@ -11,8 +11,12 @@
         </span>
     </form>
     <h4><strong>@Model.Title</strong></h4>
-    <div class="usersContainer">
-        <strong>Task of: </strong>@Model.TaskOf.UserName
-    </div>
+    @if (Model.TaskOf != null)
+    {
+        <div class="usersContainer">
+            <strong>Task of: </strong>@Model.TaskOf.UserName
+        </div>
+    }
+    
     <input type="checkbox" id="done" name="done" checked="@Model.Done">
 </div>

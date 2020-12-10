@@ -19,7 +19,7 @@ namespace IDP_Back_End.Repository.Implementation
             _ctx = ctx;
         }
 
-        public void CreateCommentAddToTask(int taskID, string text, string userName)
+        public Models.Task CreateCommentAddToTask(int taskID, string text, string userName)
         {
             var user = _ctx.Users.FirstOrDefault(u => u.UserName == userName);
             if (user == null)
@@ -36,6 +36,8 @@ namespace IDP_Back_End.Repository.Implementation
 
             _ctx.Attach(task).State = EntityState.Modified;
             _ctx.SaveChanges();
+
+            return task;
         }
 
         public void DeleteComment(int ID)

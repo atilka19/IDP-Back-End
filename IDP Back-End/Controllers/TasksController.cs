@@ -10,11 +10,15 @@ namespace IDP_Back_End.Controllers
 {
     public class TasksController : Controller
     {
-        private readonly ITaskRepository _repo;
+        private readonly ITaskRepository _taskRepo;
+        private readonly ICommentRepository _commentRepo;
+        private readonly ICheckItemRepository _checkListRepo;
 
-        public TasksController(ITaskRepository taskRepository)
+        public TasksController(ITaskRepository taskRepository, ICommentRepository commentRepository, ICheckItemRepository checkListRepo)
         {
-            _repo = taskRepository;
+            _taskRepo = taskRepository;
+            _commentRepo = commentRepository;
+            _checkListRepo = checkListRepo;
         }
 
         // GET: TasksController
@@ -27,68 +31,50 @@ namespace IDP_Back_End.Controllers
 
         public IActionResult TaskById(int taskID)
         {
-            var task = _repo.GetTaskByID(taskID);
+            var task = _taskRepo.GetTaskByID(taskID);
             return View("PartialViews/_SingleTaskView", task);
         }
 
         // GET: TasksController/Create
-        public ActionResult Create()
+        public IActionResult AddTask(string username, string title)
         {
-            return View();
+            var task = _taskRepo.AddNewTask(title, username);
+            return View("PartialViews/_SingleTaskView", task);
         }
 
-        // POST: TasksController/Create
-        [HttpPost]
-        public ActionResult Create(IFormCollection collection)
+        // GET: TasksController/Create
+        public IActionResult AddUserToTask(int taskId, string username)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var task = _taskRepo.AddUserToTask(taskId, username);
+            return View("PartialViews/_SingleTaskView", task);
+        }
+
+        // GET: TasksController/Create
+        public IActionResult AddCommentToTask(int taskId, string text, string username)
+        {
+            var task = _commentRepo.CreateCommentAddToTask(taskId, text, username);
+            return View("PartialViews/_SingleTaskView", task);
+        }
+
+        // GET: TasksController/Create
+        public RedirectToActionResult AddCheckListToTask(int taskId, string text)
+        {
+            _checkListRepo.CreateNewListItemAddToTask(taskId, text);
+            return RedirectToAction("TaskById/" + taskId, "Tasks", new { area = "" });
         }
 
         // GET: TasksController/Edit/5
-        public ActionResult Edit(int id)
+        public RedirectToActionResult EditTask(int ID, string newTitle, string newDescription, bool done)
         {
-            return View();
-        }
-
-        // POST: TasksController/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _taskRepo.UpdateTask(ID, newTitle, newDescription, done);
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
 
         // GET: TasksController/Delete/5
-        public ActionResult Delete(int id)
+        public RedirectToActionResult Delete(int id)
         {
-            return View();
-        }
-
-        // POST: TasksController/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _taskRepo.DeleteTask(id);
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
     }
 }
