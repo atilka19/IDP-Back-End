@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace IDP_Back_End.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly IUserRepository _userRepo;
@@ -24,6 +23,7 @@ namespace IDP_Back_End.Controllers
         [HttpGet]
         // Nothing is needed inside code block cause Authorize tag will trow "Unauthorized" error if no token header is present
         // The catch error should also never happen because of this, only kept it there because it might catch other error such as hosting or cors
+        [Authorize]
         public ActionResult<bool> Get()
         {
             try
@@ -57,28 +57,5 @@ namespace IDP_Back_End.Controllers
             });
 
         }
-
-        //[HttpPost]
-        //public ActionResult<LoginInputModel> Post([FromBody] LoginInputModel model)
-        //{
-        //    try
-        //    {
-        //        var check = _userRepo.GetUserByUserName(model.Username);
-        //        if (check != null)
-        //        {
-        //            return StatusCode(401, "Username is taken!");
-        //        }
-        //        else
-        //        {
-        //            var user = _userRepo.RegisterUser(model);
-        //        }
-        //        return Ok();
-
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return BadRequest(e.Message);
-        //    }
-        //}
     }
 }

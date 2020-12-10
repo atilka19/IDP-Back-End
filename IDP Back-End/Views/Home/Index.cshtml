@@ -3,6 +3,8 @@
 }
 @model List<TaskCategory>
 @using IDP_Back_End.Models;
+<script src="./js/Auth.js"></script>
+<script>checkToken();</script>
 @foreach (TaskCategory category in Model)
 {
     <div class="categoryContainer" style="margin: 10px; border: solid gray 2px">

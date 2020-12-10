@@ -54,11 +54,10 @@ namespace IDP_Back_End
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    // Adding our secret and validation parameters
                     ValidateAudience = false,
                     ValidateIssuer = false,
-                    IssuerSigningKey = JwtKey.Key,
                     ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = JwtKey.Key,
                     ValidateLifetime = true
                 };
             });
@@ -87,7 +86,6 @@ namespace IDP_Back_End
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseCors("AllowAnyOrigin");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -114,8 +112,6 @@ namespace IDP_Back_End
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
 
@@ -134,6 +130,11 @@ namespace IDP_Back_End
                     name: null,
                     pattern: "task/{id}",
                     defaults: new { controller = "Tasks", action = "TaskById" });
+
+                endpoints.MapControllerRoute(
+                    name: null,
+                    pattern: "register",
+                    defaults: new { controller = "Login", action = "Register" });
 
                 endpoints.MapControllerRoute(
                     name: null,
