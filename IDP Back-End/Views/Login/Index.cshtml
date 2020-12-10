@@ -1,12 +1,19 @@
-﻿<div class="mainContainer">
-    <form>
+﻿@{ Layout = null; }
+
+<link href="~/css/Stylingsite.css" rel="stylesheet" />
+
+<div class="Login_MainContainer">
+    <form class="login_loginbox">
         <h2>Login</h2>
-        <input type="text" name="username" />
+        Name:<br />
+        <input type="text" name="username" class="login_loginbox--textbox" />
         <br />
-        <input type="text" name="password" />
-        <br />
-        <input type="button" value="Submit" onclick="login(this.form)" />
+        Password:<br />
+        <input type="text" name="password" class="login_loginbox--textbox" />
+        <br /> <br />
+        <input type="button" value="Submit" class="login_loginbox--bottom" onclick="login(this.form)" />
+        <script src="./js/Auth.js"></script>
     </form>
 
-    <script src="./js/Auth.js"></script>
+    
 </div>

@@ -1,0 +1,177 @@
+﻿.site,
+body,
+html {
+
+    background-color: #222;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #5c5c5c;
+}
+
+
+/* 
+  login page
+  register page
+
+*/
+
+.Login_MainContainer {
+   display: grid;
+   width: 100%;
+   height: 100%;
+
+
+}
+.login_loginbox {
+    grid-column-start: 1;
+    grid-column-end: 6;
+    margin: 40px auto 0px auto;
+}
+.login_loginbox--textbox {
+    background-color: #363636;
+    color: orangered;
+    height: 30px;
+    border: 2px solid #2e2e2e;
+    margin-top: 4px;
+
+}
+.login_loginbox--bottom {
+    background-color: #363636;
+    height: 30px;
+    border: 2px solid #2e2e2e;  
+    color: deepskyblue;
+}
+
+/*layout page*/
+.Layout_wrapper {
+    display: grid;
+    width: 100%;
+    height: 100%;
+}
+
+/* layout Menu */
+
+.layout_menu {
+    grid-area: 1;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    background-color: #363636;
+    height: 100%;
+    padding-left: 10px;
+    
+}
+.layout_menu ul {
+    margin-top: 20px;
+    width: 100%;
+
+}
+    .layout_menu li {
+        width: 100%;
+       height: 30px;
+    }
+    .layout_menu li:link {
+        color: white;
+        text-decoration: none;
+        
+    }
+    .layout_menu li:hover {
+        background-color: #5c5c5c;
+    }
+    .layout_menu li:active {
+        color: white;
+    }
+    .layout_menu li:visited {
+        color: white;
+    }
+
+    .layout_menu a {
+    
+    }
+
+    .layout_menu a:link {
+        color: white;
+        text-decoration: none;
+        font-size: 20px;
+        
+    }
+
+    .layout_menu a:hover {
+        background-color: #5c5c5c;
+    }
+
+    .layout_menu a:active {
+        color: white;
+    }
+
+    .layout_menu a:visited {
+        color: white;
+    }    
+    
+    /* main content box */
+    .Layout_containerbox {
+        grid-column-start: 2;
+        grid-column-end: 10;
+        height: 100%;
+    }
+.Layout_Table {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25% 90% 90% 90% 90%;
+   /*text for to check if reptorying */
+ 
+}
+.Layout_Table_Header {
+    height: 44px;
+    width: 100%;
+    background-color: #2e2e2e;
+  
+}
+
+.Layout_Table_Header img {
+
+width: 39px;
+height: 39px;
+margin-left: 5px;
+margin-top: 2px;
+}
+
+
+
+.Layout_Table--Box {
+    min-height: 475px;
+   
+}
+
+
+
+
+.Layout_Table--Header {
+height: 40px;
+width: 100%;
+
+
+}
+.Layout_Table--Header h1 
+{
+        font-family: Arial;
+        font-size: 25px;
+        margin-top: 10px;
+        margin-left: 15px;
+        color: #5c5c5c;
+}
+
+.layout_chat {
+width: 300px;
+height: 30px;
+ background-color: #2e2e2e;
+text-align: center;
+position: fixed;
+bottom: 0px;
+right: 0px;
+color: antiquewhite;
+
+}
+
+.layout_chat p {
+    margin-top: 9px;
+    
+    
+    }
