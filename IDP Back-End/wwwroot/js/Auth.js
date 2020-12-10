@@ -28,44 +28,53 @@
     };
 }
 function checkToken() {
-    var xhr = new XMLHttpRequest();
-    var token = JSON.parse(localStorage.getItem('currentUser'));
     var currentUrl = window.location.href;
-    const myHeaders = new Headers({
-        'Content-Type': 'application/json',
-        'Authorization': 'my-auth-token'
-    });
+    var token = JSON.parse(localStorage.getItem('currentUser'));
 
-    myHeaders.append('Content-Type', 'application/json');
-    myHeaders.set('Authorization', 'Bearer ' + token);
-
-    console.log(myHeaders.get('Authorization'));
-    // Checking the current url and setting call to correct one, needed cause default home has 2 endpoints
-    if (currentUrl.indexOf("Home") !== -1 || currentUrl.indexOf("home") !== -1) {
-        if (currentUrl.indexOf("Home") !== -1) {
-           var requestUrl = currentUrl.replace("Home", "api/Auth");
+    if (token == null) {
+        window.alert("You need the be logged in!");
+        if (currentUrl.indexOf("Home") !== -1 || currentUrl.indexOf("home") !== -1) {
+            if (currentUrl.indexOf("Home") !== -1) {
+                window.location.href = currentUrl.replace("Home", "login");
+            } else {
+                window.location.href = currentUrl.replace("home", "login");
+            }
         } else {
-           var requestUrl = currentUrl.replace("home", "api/Auth");
+            window.location.href = currentUrl + "login";
         }
     } else {
-       var requestUrl = currentUrl + "api/Auth";
+        return;
     }
-
-    //xhr.open("GET", requestUrl);
-    //xhr.setRequestHeader('Authorization', 'Bearer ' + token && token.token);
-    //xhr.setRequestHeader('Content-Type', 'application/json');
-
-    //xhr.send();
-    var request = fetch(requestUrl, {
-        method: 'GET',
-        headers: myHeaders
-    }).then(response => {
-        console.log("Accepted");
-    }).catch(error => {
-        console.error(error.message);
-    });
-    console.log(request);
+    
 }
+//function checkToken() {
+//    var xhr = new XMLHttpRequest();
+//    var token = JSON.parse(localStorage.getItem('currentUser'));
+//    var currentUrl = window.location.href;
+
+//    // Checking the current url and setting call to correct one, needed cause default home has 2 endpoints
+//    if (currentUrl.indexOf("Home") !== -1 || currentUrl.indexOf("home") !== -1) {
+//        if (currentUrl.indexOf("Home") !== -1) {
+//           var requestUrl = currentUrl.replace("Home", "api/Auth");
+//        } else {
+//           var requestUrl = currentUrl.replace("home", "api/Auth");
+//        }
+//    } else {
+//       var requestUrl = currentUrl + "api/Auth";
+//    }
+//    var request = fetch(requestUrl, {
+//        method: 'GET',
+//        headers: new Headers({
+//            'Content-Type': 'application/json',
+//            'Authorization': 'Bearer ' + token && token.token
+//        })
+//    }).then(response => {
+//        console.log("Accepted");
+//    }).catch(error => {
+//        console.error(error.message);
+//    });
+//    console.log(request);
+//}
 
 //function checkToken() {
 //    var token = JSON.parse(localStorage.getItem('currentUser'));
