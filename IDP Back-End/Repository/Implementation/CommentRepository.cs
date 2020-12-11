@@ -42,10 +42,13 @@ namespace IDP_Back_End.Repository.Implementation
             return task;
         }
 
-        public void DeleteComment(int ID)
+        public Models.Task DeleteComment(int ID)
         {
-            _ctx.Remove(_ctx.Comments.FirstOrDefault(c => c.ID == ID));
+            var comment = _ctx.Comments.FirstOrDefault(c => c.ID == ID);
+            _ctx.Remove(comment);
             _ctx.SaveChanges();
+
+            return _taskRepo.GetTaskByID(comment.TaskID);
         }
 
         public void UpdateCommentText(int ID, string newText)

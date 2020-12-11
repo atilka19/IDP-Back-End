@@ -9,27 +9,21 @@
     <div class="textContainer">
         @Model.Text
     </div>
-    @*<script type="text/javascript">
+    <script type="text/javascript">
         function validateMyForm(commentUser)
         {
-          if (commentUser != JSON.parse(localStorage.getItem('currentUser')))
-          {
-            alert("validation failed false");
-            returnToPreviousPage();
-            return false;
-          }
-
-          alert("validations passed");
-          return true;
+            var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (commentUser != currentUser.username) {
+                alert("You are only allowed to delete your own comments!");
+                return false;
+            } 
+            return true;
         }
     </script>
-    <form id="addCheckListItemForm" asp-action="AddCheckListToTask" asp-controller="Tasks" method="get" onsubmit="return validateMyForm(@Model.User.UserName)">
-        <input type="hidden" name="taskId" value="@Model.ID" />
-        <input type="text" name="text" value="" />
+    <form id="addCheckListItemForm" asp-action="Delete" asp-controller="Comment" method="delete" onsubmit="return validateMyForm('@Model.User.UserName')">
+        <input type="hidden" name="id" value="@Model.ID" />
         <span class="card-text p-1">
-            <button type="submit" class="btn btn-success btn-sm pull-right" style="float:right">
-                Post
-            </button>
+            <input type="submit" value="Delete" style="float:right">
         </span>
-    </form>*@
+    </form>
 </div>

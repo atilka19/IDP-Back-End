@@ -11,7 +11,7 @@ namespace IDP_Back_End.Repository.Interface
         // CREATE
         Models.Task CreateCommentAddToTask(int taskID, string text, string userName);
         // DELETE
-        void DeleteComment(int ID);
+        Models.Task DeleteComment(int ID);
 
         // UPDATE
         void UpdateCommentText(int ID, string newText);

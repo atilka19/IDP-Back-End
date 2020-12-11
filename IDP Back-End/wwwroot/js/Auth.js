@@ -33,6 +33,14 @@ function checkToken() {
 
     if (token == null) {
         window.alert("You need the be logged in!");
+        if (currentUrl.indexOf("chat") !== -1 || currentUrl.indexOf("Chat") !== -1) {
+            if (currentUrl.indexOf("Chat") !== -1) {
+                window.location.href = currentUrl.replace("Chat", "login");
+            } else {
+                window.location.href = currentUrl.replace("chat", "login");
+            }
+            return;
+        }
         if (currentUrl.indexOf("Home") !== -1 || currentUrl.indexOf("home") !== -1) {
             if (currentUrl.indexOf("Home") !== -1) {
                 window.location.href = currentUrl.replace("Home", "login");

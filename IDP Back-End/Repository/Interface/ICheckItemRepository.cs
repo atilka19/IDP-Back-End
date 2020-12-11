@@ -14,6 +14,6 @@ namespace IDP_Back_End.Repository.Interface
         void CheckListItemDone(int ID);
         void UpdateCheckListItemText(int ID, string newText);
         // DELETE
-        void DeleteCheckListItem(int ID);
+        Models.Task DeleteCheckListItem(int ID);
     }
 }

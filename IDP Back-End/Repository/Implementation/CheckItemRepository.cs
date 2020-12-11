@@ -67,10 +67,13 @@ namespace IDP_Back_End.Repository.Implementation
             _ctx.SaveChanges();
         }
 
-        public void DeleteCheckListItem(int ID)
+        public Models.Task DeleteCheckListItem(int ID)
         {
-            _ctx.Remove(_ctx.CheckListItems.FirstOrDefault(c => c.ID == ID));
+            var cli = _ctx.CheckListItems.FirstOrDefault(c => c.ID == ID);
+            _ctx.Remove(cli);
             _ctx.SaveChanges();
+
+            return _taskRepo.GetTaskByID(cli.TaskID);
         }
     }
 }

@@ -37,9 +37,9 @@ connection.start().then(function () {
 document.getElementById("sendButton").addEventListener("click", function (event) {
 
     // TODO change this so it doesn't come from the form but the logged-in user's name get's sent
-    var user = document.getElementById("userInput").value;
     var message = document.getElementById("messageInput").value;
-    connection.invoke("SendMessage", user, message).catch(function (err) {
+    var token = JSON.parse(localStorage.getItem('currentUser'));
+    connection.invoke("SendMessage", token.username, message).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();
