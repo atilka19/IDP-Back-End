@@ -26,7 +26,7 @@
 
                         @foreach (IDP_Back_End.Models.Task task in category.Tasks)
                         {
-                            @:addTask(document.getElementById("@category.Title").querySelector(".table-box-list"), { id: @(task.ID), title: @(Json.Serialize(task.Title)), username: @(Json.Serialize(task.CreatedBy.UserName)), done: @(Json.Serialize(task.Done)) });
+                            @:addTask(document.getElementById("@category.Title").querySelector(".table-box-list"), { id: @(task.ID), title: @(Json.Serialize(task.Title)), username: @(Json.Serialize(task.CreatedBy.UserName)), done: @(Json.Serialize(task.Done)), fromDB: true });
                         }
                     })
                 </script>

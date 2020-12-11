@@ -11,7 +11,7 @@ namespace IDP_Back_End.Repository.Interface
         Task GetTaskByID(int ID);
         // CREATE
         Task CreateTask(string title, string description, int categoryID, string createdBy, string taskOf);
-        Task AddNewTask(string title, string createdBy);
+        Task AddNewTask(string title, string createdBy, string categoryName);
         Task AddUserToTask(int id, string taskOf);
 
         // UPDATE

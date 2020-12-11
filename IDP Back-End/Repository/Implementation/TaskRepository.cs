@@ -17,16 +17,19 @@ namespace IDP_Back_End.Repository.Implementation
             _ctx = ctx;
         }
 
-        public Task AddNewTask(string title, string createdBy)
+        public Task AddNewTask(string title, string createdBy, string categoryName)
         {
             var newTask = new Task();
             var user = _ctx.Users.FirstOrDefault(u => u.UserName == createdBy);
+            var category = _ctx.Categories.FirstOrDefault(c => c.Title == categoryName);
             newTask.Title = title;
             newTask.CreatedBy = user;
+            newTask.Category = category;
 
             _ctx.Attach(newTask).State = EntityState.Added;
             _ctx.SaveChanges();
-            return newTask;
+            
+            return GetTaskByID(newTask.ID);
         }
 
         public Task AddUserToTask(int id, string taskOf)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IDP_Back_End.Models;
 using IDP_Back_End.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -36,9 +37,11 @@ namespace IDP_Back_End.Controllers
         }
 
         // GET: TasksController/Create
-        public IActionResult AddTask(string username, string title)
+        [HttpPost]
+        [Route("api/addTask")]
+        public IActionResult AddTask([FromBody] TaskInputModel input)
         {
-            var task = _taskRepo.AddNewTask(title, username);
+            var task = _taskRepo.AddNewTask(input.Title, input.Username, input.CategoryName);
             return View("PartialViews/_SingleTaskView", task);
         }
 

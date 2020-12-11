@@ -28,7 +28,33 @@ function newTask(list) {
         }
     })
     input.focus();
+    // Adding Listener for when focus has ended on new element
+    input.addEventListener("blur", (event) => {
+        
+        console.log();
+        var xhr = new XMLHttpRequest();
+        var url = window.location.href + "/addTask";
+        console.log(url);
+        xhr.open("POST", window.location.href +  "api/addTask");
+        xhr.setRequestHeader('Content-Type', 'application/json');
 
+        xhr.send(JSON.stringify({
+            username: JSON.parse(localStorage.getItem('currentUser')).username,
+            title: event.currentTarget.value,
+            categoryName: input.parentNode.parentNode.parentNode.childNodes[1].innerText
+        }));
+
+        xhr.onreadystatechange = function () {
+            if (this.readyState != 4) return;
+
+            if (this.status == 200) {
+                location.reload();
+            } if (this.status == 401) {
+                // If resonse was not OK, display error
+                window.alert("Something went wrong");
+            }
+        };
+    });
     
 }
 
