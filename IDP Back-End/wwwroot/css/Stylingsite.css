@@ -8,19 +8,40 @@ html {
 }
 
 
-/* 
+/* Chat Page */
+.Chat_container {
+    display: grid;
+    width: 100%;
+    height: 100%;
+
+}
+.Chat_container-row {
+    margin-top: 10px;
+    grid-column-start: 2;
+    grid-column-end: 10;
+}
+.Chat_container--grid2 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+.Chat_container--grid4 {
+    grid-column-start: 4;
+    grid-column-end: 10;
+}
+.Chat_container--grid6 {
+
+
+}
+    /* 
   login page
   register page
 
 */
-
-.Login_MainContainer {
-   display: grid;
-   width: 100%;
-   height: 100%;
-
-
-}
+    .Login_MainContainer {
+        display: grid;
+        width: 100%;
+        height: 100%;
+    }
 .login_loginbox {
     grid-column-start: 1;
     grid-column-end: 6;

@@ -1,18 +1,20 @@
 ﻿@page
-<div class="container">
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-2">User</div>
-        <div class="col-4"><input type="text" id="userInput" /></div>
+
+<link href="~/css/Stylingsite.css" rel="stylesheet" />
+<div class="Chat_container">
+    <div class="Chat_container-row">&nbsp;</div>
+    <div class="Chat_container-row">
+        <div class="Chat_container--grid2">User</div>
+        <div class="Chat_container--grid4"><input type="text" id="userInput" class="login_loginbox--textbox" /></div>
     </div>
-    <div class="row">
-        <div class="col-2">Message</div>
-        <div class="col-4"><input type="text" id="messageInput" /></div>
+    <div class="Chat_container-row">
+        <div class="Chat_container--grid2">Message</div>
+        <div class="Chat_container--grid4"><input type="text" id="messageInput" class="login_loginbox--textbox" /></div>
     </div>
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-6">
-            <input type="button" id="sendButton" value="Send Message" />
+    <div class="Chat_container-row">&nbsp;</div>
+    <div class="Chat_container-row">
+        <div class="Chat_container--grid6">
+            <input type="button" id="sendButton" value="Send Message" class="login_loginbox--bottom" />
         </div>
     </div>
 </div>
@@ -28,3 +30,5 @@
 </div>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>
+
+</div>
