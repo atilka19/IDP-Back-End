@@ -131,11 +131,6 @@ namespace IDP_Back_End
 
                 endpoints.MapControllerRoute(
                     name: null,
-                    pattern: "addTask",
-                    defaults: new { controller = "Tasks", action = "AddTask" });
-
-                endpoints.MapControllerRoute(
-                    name: null,
                     pattern: "register",
                     defaults: new { controller = "Login", action = "Register" });
 

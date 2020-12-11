@@ -30,11 +30,7 @@ function newTask(list) {
     input.focus();
     // Adding Listener for when focus has ended on new element
     input.addEventListener("blur", (event) => {
-        
-        console.log();
         var xhr = new XMLHttpRequest();
-        var url = window.location.href + "/addTask";
-        console.log(url);
         xhr.open("POST", window.location.href +  "api/addTask");
         xhr.setRequestHeader('Content-Type', 'application/json');
 

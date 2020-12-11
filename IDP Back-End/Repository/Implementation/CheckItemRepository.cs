@@ -53,7 +53,7 @@ namespace IDP_Back_End.Repository.Implementation
             _ctx.SaveChanges();
         }
 
-        public void UpdateCheckListItemText(int ID, string newText)
+        public Models.Task UpdateCheckListItem(int ID, string newText, bool newDone)
         {
             var item = _ctx.CheckListItems.FirstOrDefault(c => c.ID == ID);
             if (item == null)
@@ -62,9 +62,12 @@ namespace IDP_Back_End.Repository.Implementation
             }
 
             item.Text = newText;
+            item.Done = newDone;
 
             _ctx.Attach(item).State = EntityState.Modified;
             _ctx.SaveChanges();
+
+            return _taskRepo.GetTaskByID(item.TaskID);
         }
 
         public Models.Task DeleteCheckListItem(int ID)

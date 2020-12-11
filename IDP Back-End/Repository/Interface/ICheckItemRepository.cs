@@ -12,7 +12,7 @@ namespace IDP_Back_End.Repository.Interface
         Models.Task CreateNewListItemAddToTask(int taskID, string text);
         // UPDATE
         void CheckListItemDone(int ID);
-        void UpdateCheckListItemText(int ID, string newText);
+        Models.Task UpdateCheckListItem(int ID, string newText, bool newDone);
         // DELETE
         Models.Task DeleteCheckListItem(int ID);
     }

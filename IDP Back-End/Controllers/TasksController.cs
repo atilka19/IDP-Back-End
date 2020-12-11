@@ -44,6 +44,20 @@ namespace IDP_Back_End.Controllers
             var task = _taskRepo.AddNewTask(input.Title, input.Username, input.CategoryName);
             return View("PartialViews/_SingleTaskView", task);
         }
+        [HttpPost]
+        [Route("api/updateCheckListItem")]
+        public IActionResult EditCheckListItem([FromBody] ItemInputModel item)
+        {
+            try
+            {
+                var task = _checkListRepo.UpdateCheckListItem(item.Id, item.Text, item.Done);
+                return View("PartialViews/_SingleTaskView", task);
+
+            } catch(Exception e) 
+            {
+                throw e;
+            }
+        }
 
         // GET: TasksController/Create
         public IActionResult AddUserToTask(int taskId, string username)
