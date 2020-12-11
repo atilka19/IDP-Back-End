@@ -4,11 +4,12 @@
     var xhr = new XMLHttpRequest();
     xhr.open("POST", window.location.href.replace("login", "api/Auth"));
     xhr.setRequestHeader('Content-Type', 'application/json');
+    console.log(form.username.value);
+    console.log(form.password.value);
     xhr.send(JSON.stringify({
         username: form.username.value,
         password: form.password.value
     }));
-    console.log(form.username);
     xhr.onreadystatechange = function () {
         if (this.readyState != 4) return;
 
@@ -18,7 +19,7 @@
             var data = JSON.parse(this.responseText);
             window.localStorage.setItem('currentUser', JSON.stringify(
                 { username: data.username, token: data.token, isAdmin: data.isAdmin }));
-            window.location.href = window.location.href.replace("login", "Home");
+            window.location.href = window.location.origin + "/home";
         } else {
             // If resonse was not OK, display error
             window.alert("Username or Password incorrect!");
@@ -28,28 +29,11 @@
     };
 }
 function checkToken() {
-    var currentUrl = window.location.href;
     var token = JSON.parse(localStorage.getItem('currentUser'));
 
     if (token == null) {
         window.alert("You need the be logged in!");
-        if (currentUrl.indexOf("chat") !== -1 || currentUrl.indexOf("Chat") !== -1) {
-            if (currentUrl.indexOf("Chat") !== -1) {
-                window.location.href = currentUrl.replace("Chat", "login");
-            } else {
-                window.location.href = currentUrl.replace("chat", "login");
-            }
-            return;
-        }
-        if (currentUrl.indexOf("Home") !== -1 || currentUrl.indexOf("home") !== -1) {
-            if (currentUrl.indexOf("Home") !== -1) {
-                window.location.href = currentUrl.replace("Home", "login");
-            } else {
-                window.location.href = currentUrl.replace("home", "login");
-            }
-        } else {
-            window.location.href = currentUrl + "login";
-        }
+        window.location.href = window.location.origin + "/login"
     } else {
         return;
     }
@@ -93,9 +77,10 @@ function appendUserName(formID, fieldID) {
 //}
 function register(form) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", window.location.href.replace("register", "api/User"));
+    xhr.open("POST", window.location.origin + "/api/User");
     xhr.setRequestHeader('Content-Type', 'application/json');
-
+    console.log(form.username.value);
+    console.log(form.password.value);
     // Need to add some sort of validation into here for username and pw
     xhr.send(JSON.stringify({
         username: form.username.value,
@@ -109,7 +94,7 @@ function register(form) {
 
             // If response was OK, tell user, navigate to login page
             window.alert("Register Successful! Please log in.");
-            window.location.href = window.location.href.replace("register", "login");
+            window.location.href = window.location.origin + "/login"
         } if (this.status == 401) {
             // If resonse was not OK, display error
             window.alert("Username is already taken!");
