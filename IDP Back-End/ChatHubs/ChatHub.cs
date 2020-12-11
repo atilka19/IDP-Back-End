@@ -18,7 +18,7 @@ namespace IDP_Back_End.ChatHubs
         public async System.Threading.Tasks.Task SendMessage(string userName, string message)
         {
             _repo.SendMessage(userName, message);
-            await Clients.All.SendAsync("ReceiveMessage", userName, message);
+            await Clients.All.SendAsync("ReceiveMessageNew", userName, message);
         }
 
         public override async System.Threading.Tasks.Task OnConnectedAsync()

@@ -22,7 +22,7 @@ namespace IDP_Back_End.Repository.Implementation
         // Ideally we would implemenet a bit of pagination and make the chat infinite scroll.....
         public List<ChatMessage> GetMessages()
         {
-            return _ctx.ChatMessages.ToList();
+            return _ctx.ChatMessages.OrderByDescending(cm => cm.TimePosted).ToList();
         }
 
 
@@ -33,6 +33,7 @@ namespace IDP_Back_End.Repository.Implementation
             newMessage.User = _ctx.Users.FirstOrDefault(u => u.UserName == username);
             newMessage.UserName = username;
             newMessage.Message = message;
+            newMessage.TimePosted = DateTime.Now;
 
             _ctx.Attach(newMessage).State = EntityState.Added;
             _ctx.SaveChanges();

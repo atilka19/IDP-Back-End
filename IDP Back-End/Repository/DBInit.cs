@@ -162,22 +162,6 @@ namespace IDP_Back_End.Repository
             Title = "Completed Tasks",
             Tasks = new List<Task>()
         }).Entity;
-
-        var chat1 = ctx.ChatMessages.Add(new ChatMessage()
-        {
-            Message = "To Do List",
-            User = user0
-        }).Entity;
-        var chat2 = ctx.ChatMessages.Add(new ChatMessage()
-        {
-            Message = "To Do List",
-            User = user0
-        }).Entity;
-        var chat3 = ctx.ChatMessages.Add(new ChatMessage()
-        {
-            Message = "To Do List",
-            User = user1
-        }).Entity;
             category0.Tasks.Add(task0);
             category0.Tasks.Add(task1);
             category3.Tasks.Add(task2);

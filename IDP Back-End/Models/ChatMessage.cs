@@ -13,6 +13,7 @@ namespace IDP_Back_End.Models
         // Entity FrameWork Stuff
         public User User { get; set; }
         public string Message { get; set; }
+        public DateTime TimePosted { get; set; }
         public string UserName { get; set; }
     }
 }

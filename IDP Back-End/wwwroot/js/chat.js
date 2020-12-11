@@ -13,6 +13,15 @@ connection.on("ReceiveMessage", function (user, message) {
     document.getElementById("messagesList").appendChild(li);
 });
 
+connection.on("ReceiveMessageNew", function (user, message) {
+    var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    var encodedMsg = user + " says " + msg;
+    var li = document.createElement("li");
+    li.textContent = encodedMsg;
+    var ul = document.getElementById("messagesList");
+    ul.insertBefore(li, ul.firstChild);
+});
+
 /* TODO Try and get this working, would be more elegant solution
  * connection.on("ReceiveMessages", function (chatMessage(user, message)[]) {
     var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
