@@ -13,12 +13,12 @@ html {
     display: grid;
     width: 100%;
     height: 100%;
-
+    
 }
 .Chat_container-row {
     margin-top: 10px;
     grid-column-start: 2;
-    grid-column-end: 10;
+    grid-column-end: 9;
 }
 .Chat_container--grid2 {
     grid-column-start: 1;
@@ -26,10 +26,22 @@ html {
 }
 .Chat_container--grid4 {
     grid-column-start: 4;
-    grid-column-end: 10;
+    grid-column-end: 9;
 }
 .Chat_container--grid6 {
-
+    margin-top: 10px;
+    grid-column-start: 1;
+    grid-column-end: 10;
+    border: 1px solid #8a8a8a;
+}
+.Chat_container--list {
+    grid-column-start: 2;
+    grid-column-end: 9;
+    color: #8a8a8a;
+}
+.Chat_container--list li {
+    margin-top: 8px;
+    
 
 }
     /* 
@@ -38,10 +50,10 @@ html {
 
 */
     .Login_MainContainer {
-        display: grid;
-        width: 100%;
-        height: 100%;
-    }
+    display: grid;
+    width: 100%;
+    height: 100%;
+}
 .login_loginbox {
     grid-column-start: 1;
     grid-column-end: 6;
@@ -140,10 +152,9 @@ html {
  
 }
 .Layout_Table_Header {
-    height: 44px;
     width: 100%;
+    height: 50px;
     background-color: #2e2e2e;
-  
 }
 
 .Layout_Table_Header img {
