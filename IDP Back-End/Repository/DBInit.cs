@@ -142,19 +142,29 @@ namespace IDP_Back_End.Repository
             task1.Comments.Add(comment4);
 
         // Adding 2 Categories
-        var category0 = ctx.Categories.Add(new TaskCategory()
+        var category0= ctx.Categories.Add(new TaskCategory()
         {
             Title = "Research",
             Tasks = new List<Task>()
         }).Entity;
         var category1 = ctx.Categories.Add(new TaskCategory()
         {
-            Title = "Done",
+            Title = "To Do List",
+            Tasks = new List<Task>()
+        }).Entity;
+        var category2 = ctx.Categories.Add(new TaskCategory()
+        {
+            Title = "In Progress",
+            Tasks = new List<Task>()
+        }).Entity;
+        var category3 = ctx.Categories.Add(new TaskCategory()
+        {
+            Title = "Completed Tasks",
             Tasks = new List<Task>()
         }).Entity;
             category0.Tasks.Add(task0);
             category0.Tasks.Add(task1);
-            category1.Tasks.Add(task2);
+            category3.Tasks.Add(task2);
             ctx.SaveChanges();
     }
     #region Methods needed

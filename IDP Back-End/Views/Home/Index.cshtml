@@ -1,19 +1,55 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-@model List<TaskCategory>
+﻿@model List<TaskCategory>
 @using IDP_Back_End.Models;
-<script src="./js/Auth.js"></script>
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts {
+    <script src="~/js/dragDrop.js"></script>
+    <script src="~/js/taskButton.js"></script>
+    <script src="./js/Auth.js"></script>
+}
+
 <script>checkToken();</script>
-@foreach (TaskCategory category in Model)
-{
-    <div class="categoryContainer" style="margin: 10px; border: solid gray 2px">
-        <h2><strong>@category.Title</strong></h2>
-        <div class="tasksContainer">
-            @foreach (IDP_Back_End.Models.Task task in category.Tasks)
-            {
-                @await Html.PartialAsync("PartialViews/_TaskInCategoryView", task);
-            }
+<div class="category-container">
+    <div class="table-row">
+        @foreach (TaskCategory category in Model)
+        {
+
+
+            <div class="table-box" id="@category.Title" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
+                <h3>@category.Title</h3>
+                <div class="underline"></div>
+                <script>
+                    window.addEventListener("DOMContentLoaded", function () {
+
+
+                        @foreach (IDP_Back_End.Models.Task task in category.Tasks)
+                        {
+                            @:addTask(document.getElementById("@category.Title").querySelector(".table-box-list"), { id: @(task.ID), title: @(Json.Serialize(task.Title)), username: @(Json.Serialize(task.CreatedBy.UserName)), done: @(Json.Serialize(task.Done)) });
+                        }
+                    })
+                </script>
+                <div class="table-box-list"></div>
+                <button class="task-button">+ Add Task</button>
+
+            </div>
+
+        }
+    </div>
+</div>
+<template id="card-template">
+    <div id="card" class="task" draggable="true" ondragstart="dragstart_handler(event);" ondragend="dragend_handler(event);">
+        <input type="text" class="card-input" />
+        <a class="edit-task-link" href="@(Url.Action("TaskById", "Tasks"))">
+            <img src="~/assets/images/edit.png" name="pencilEdit" class="pencil" id="pencil" />
+        </a>
+
+        <div class="task-by">
+            <p>Task by: <span class="task-username"></span></p>
+            <input type="checkbox" id="done" class="task-status" name="done" />
+            <span class="checkmark"></span>
         </div>
     </div>
-}
+</template>

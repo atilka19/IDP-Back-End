@@ -1,6 +1,208 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+/* Layout Page */
+
+.layout-wrapper {
+    display: grid;
+    grid-template-columns: 200px auto;
+    min-height: 100vh;
+
+}
+
+.main-area {
+    padding-bottom: 61px;
+}
+
+/* Side-bar Menu */
+.sidebar-menu {
+    background-color: #363636;
+    height: 100%;
+    width: 100%;
+    
+
+}
+    .sidebar-menu ul {
+        list-style: none;
+        margin: 0;
+        padding: 16px;
+    }
+
+    .sidebar-menu ul li {
+        margin: 0;
+        padding: 0;
+    }
+
+    .sidebar-menu a {
+        padding: 5px 0;
+        text-decoration: none;
+        font-size: 18px;
+        line-height: 23px;
+        color: #818181;
+        display: block;
+    }
+
+    .sidebar-menu a:hover {
+        color: #f1f1f1;
+    }
+
+    .sidebar-menu h1 {
+        font-size: 22px;
+        margin: 0;
+        padding: 0 16px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #fff;
+    }
+
+.project-name {
+    font-family: "Roboto-Bold", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 42px;
+    color: #fff;
+    margin-bottom: 2px;
+    padding-left: 10px
+}
+
+.project-name-line {
+    width: 350px;
+    height: 0px;
+    border: 1px solid #fff;
+    padding: 0px;
+    margin-bottom: 10px;
+}
+
+/* Card Table styles */
+
+.category-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.table-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.table-box {
+    position: relative;
+    padding: 1rem;
+    margin: 20px;
+    border-radius: 11px;
+    min-width: 300px;
+    min-height: 400px;
+    background-color: rgba(196, 196, 196, 1);
+    padding-bottom: 60px;
+}
+    .table-box h3 {
+        font-family: "Roboto-Bold", sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 21px;
+        color: #fff;
+        text-align: start;
+    }
+
+.underline {
+    width: 140px;
+    height: 0px; 
+    border: 1px solid #fff;
+}
+
+/* Button styles */
+
+.task-button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 116px;
+    border-radius: 7px;
+    padding: 5px 5px;
+    font-size: 18px;
+    font-family: "Roboto-Bold", sans-serif;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border-style: none;
+}
+
+.task-button {
+    color: #fff;
+    background-color: #9f9f9f;
+}
+    .task-button:hover {
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+        background-color: #6b6b6b;
+    }
+
+/* Cards */
+
+.task {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 7px;
+}
+
+.card-input {
+    border: 0 solid transparent;
+    font-size: 16px;
+    width: calc(100% - 40px);
+}
+
+    .card-input:focus {
+        border: 0 solid transparent;
+        border-bottom: 1px solid #ccc;
+        outline: none;
+    }
+
+.card-title {
+    font-size: 16px;
+    font-family: Arial;
+    font-weight: bold;
+    width: 100%;
+}
+
+.edit-button {
+    position: relative;
+    left: 155px;
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+}
+
+.pencil {
+    width: 16px;
+    height: 16px;
+}
+
+/* Chat */
+.layout_chat {
+    width: 300px;
+    height: 30px;
+    background-color: #2e2e2e;
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    color: antiquewhite;
+}
+
+    .layout_chat p {
+        margin-top: 9px;
+    }
+
+/* Navbar */
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -60,7 +262,8 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin: 0;
+  padding: 0;
 }
 .footer {
   position: absolute;
