@@ -1,14 +1,56 @@
 ﻿/* Title and desc */
 
-.task-view {
+.task-container {
     position: relative;
     padding: 1rem;
     margin: 20px;
     border-radius: 11px;
-    width: 100%;
+    width: 750px;
+    height: 100%;
     background-color: rgba(196, 196, 196, 1);
+}
+
+h2 {
+    font-size: 22px;
+    font-family: Roboto;
+    color: #3f3f3f;
+    margin: 5px 0;
+}
+
+.users-container {
+    font-size: 14px;
+    font-family: Roboto;
+    color: #7b7b7b;
+    margin: 5px 0;
 }
 
 /* Checklist */
 
+.checklist-container {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 7px;
+}
+
+.post-checkmark {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+
 /* Comments */
+
+.comment-container {
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 7px;
+}
+
+.post-comment {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}

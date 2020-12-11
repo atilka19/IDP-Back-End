@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="~/css/taskViewer.css" />
 </head>
 <body>
-    <div class="taskContainer" style="margin: 10px">
+    <div class="task-container" style="margin: 10px">
         <h2><strong>@Model.Title</strong></h2>
-        <div class="descriptionContainer">
+        <div class="desc-container">
             @Model.Description
         </div>
-        <div class="usersContainer">
+        <div class="users-container">
             <strong>Created By: </strong>@Model.CreatedBy.UserName
             @if (Model.TaskOf != null)
             {
@@ -22,25 +22,27 @@
             }
         </div>
 
-        <h3><strong>Checklist</strong></h3>
-        <div class="checkListContainer" style="margin: 10px; border: solid gray 2px">
+        <h2>Checklist</h2>
+        <div class="checklist-container">
             @foreach (CheckListItem cli in Model.CheckListItems)
             {
                 @await Html.PartialAsync("PartialViews/_TaskCheckListItemView", cli);
             }
             <form id="addCheckListItemForm" asp-action="AddCheckListToTask" asp-controller="Tasks" method="get">
                 <input type="hidden" name="taskId" value="@Model.ID" />
-                <input type="text" name="text" value="" />
-                <span class="card-text p-1">
-                    <button type="submit" class="btn btn-success btn-sm pull-right" style="float:right">
-                        Post
-                    </button>
-                </span>
+                <div class="post-checkmark">
+                    <input type="text" name="text" value="" />
+                    <span class="card-text p-1">
+                        <button type="submit" class="btn btn-success btn-sm pull-right" style="margin-bottom: 5px">
+                            Post
+                        </button>
+                    </span>
+                </div>
             </form>
         </div>
 
-        <h3><strong>Comments</strong></h3>
-        <div class="commentsContainer" style="margin: 10px; border: solid gray 2px">
+        <h2>Comments</h2>
+        <div class="comment-container">
             @foreach (Comment comment in Model.Comments)
             {
                 @await Html.PartialAsync("PartialViews/_TaskCommentView", comment);
@@ -48,13 +50,15 @@
             <div class="col-md-6">
                 <form id="addCommentForm" asp-action="AddCommentToTask" asp-controller="Tasks" method="get">
                     <input type="hidden" name="taskId" value="@Model.ID" />
-                    <input type="hidden" name="username" id="username" />
-                    <input type="text" name="text" value="" />
-                    <span class="card-text p-1">
-                        <button type="submit" class="btn btn-success btn-sm pull-right" style="float:right">
-                            Post
-                        </button>
-                    </span>
+                    <input type="hidden" name="username" id="username" />                   
+                    <div class="post-comment">
+                        <input type="text" name="text" value="" />
+                        <span class="card-text p-1">
+                            <button type="submit" class="btn btn-success btn-sm pull-right" style="margin-bottom: 5px">
+                                Post
+                            </button>
+                        </span>
+                    </div>
                     <script>
                         document.getElementById('addCommentForm').onsubmit = function () {
                             var txt = document.getElementById('username');
