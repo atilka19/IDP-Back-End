@@ -39,22 +39,18 @@ function newTask(list) {
             title: event.currentTarget.value,
             categoryName: input.parentNode.parentNode.parentNode.childNodes[1].innerText
         }));
-
+        
         xhr.onreadystatechange = function () {
             if (this.readyState != 4) return;
 
-            if (this.status == 200) {
-                location.reload();
-            } if (this.status == 400) {
-                // If resonse was abou user delete token, navigate to login
-                if (this.statusText == "User was not found! Please log in again!") {
-                    windo.alert(this.statusText)
-                    window.localStorage.removeItem("currentUser");
-                    window.location.href = window.location.origin + "/login"
-                } else {
-                    // If it was something else, notify the user
-                    window.alert("Something went wrong");
-                }
+            // If error was because of a corrupt token, tell user, remove token, navigate to login page
+            if (xhr.responseText == "User was not found! Please log in again!") {
+                window.alert(xhr.responseText)
+                window.localStorage.removeItem("currentUser");
+                window.location.href = window.location.origin + "/login"
+            } else {
+                // If it was something else, notify the user
+                window.alert("Something went wrong");
             }
         };
     });
