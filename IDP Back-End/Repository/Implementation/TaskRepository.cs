@@ -17,19 +17,32 @@ namespace IDP_Back_End.Repository.Implementation
             _ctx = ctx;
         }
 
-        public Task AddNewTask(string title, string createdBy, string categoryName)
+        public void AddNewTask(string title, string createdBy, string categoryName)
         {
-            var newTask = new Task();
+            if(title.Length == 0 || createdBy == null || categoryName == null)
+            {
+                throw new InvalidDataException("A value was null! Try again.");
+            }
             var user = _ctx.Users.FirstOrDefault(u => u.UserName == createdBy);
+            if(user == null)
+            {
+                throw new InvalidDataException("User was not found! Please log in again!");
+            }
+
             var category = _ctx.Categories.FirstOrDefault(c => c.Title == categoryName);
+            if (category == null)
+            {
+                throw new InvalidDataException("Category was not found!");
+            }
+
+            var newTask = new Task();
             newTask.Title = title;
             newTask.CreatedBy = user;
+            newTask.CreatedByID = user.Id;
             newTask.Category = category;
 
             _ctx.Attach(newTask).State = EntityState.Added;
             _ctx.SaveChanges();
-            
-            return GetTaskByID(newTask.ID);
         }
 
         public Task AddUserToTask(int id, string taskOf)
@@ -43,31 +56,6 @@ namespace IDP_Back_End.Repository.Implementation
             _ctx.SaveChanges();
 
             return task;
-        }
-
-        public Task CreateTask(string title, string description, int categoryID, string createdBy, string taskOf)
-        {
-            var newTask = new Task();
-
-            // EF relational stuff
-            newTask.Category = _ctx.Categories.FirstOrDefault(t => t.ID == categoryID);
-            newTask.TaskOf = _ctx.Users.FirstOrDefault(u => u.UserName == taskOf);
-            newTask.CreatedBy = _ctx.Users.FirstOrDefault(u => u.UserName == createdBy);
-
-            // Foreign Keys
-            newTask.CategoryID = newTask.Category.ID;
-            newTask.TaskOfID = newTask.TaskOf.Id;
-            newTask.CreatedByID = newTask.CreatedBy.Id;
-
-            // Other Data
-            newTask.Title = title;
-            newTask.Description = description;
-            newTask.TimeCreated = new DateTime();
-            newTask.Done = false;
-
-            _ctx.Attach(newTask).State = EntityState.Added;
-            _ctx.SaveChanges();
-            return newTask;
         }
 
         public void DeleteTask(int ID)
@@ -107,7 +95,7 @@ namespace IDP_Back_End.Repository.Implementation
             _ctx.SaveChanges();
         }
 
-        public void UpdateTaskCategory(int taskID, string category)
+        public Task UpdateTaskCategory(int taskID, string category)
         {
             var taskToUpdate = GetTaskByID(taskID);
             var newCategory = _ctx.Categories.FirstOrDefault(c => c.Title == category);
@@ -117,6 +105,8 @@ namespace IDP_Back_End.Repository.Implementation
                 taskToUpdate.Category = newCategory;
                 _ctx.Attach(taskToUpdate).State = EntityState.Modified;
                 _ctx.SaveChanges();
+
+                return GetTaskByID(taskID);
             } else
             {
                 throw new InvalidDataException("Task or Category was not found");

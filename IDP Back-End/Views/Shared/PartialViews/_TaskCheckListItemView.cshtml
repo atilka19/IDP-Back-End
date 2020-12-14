@@ -4,7 +4,7 @@
 <div class="row" style="margin: 10px;">
     <div class="checklist-item">
         <input id="text-@Model.ID" style="width: 70px; overflow: hidden; white-space: nowrap;" value="@Model.Text">
-        <input type="checkbox" id="done" name="done" checked="@Model.Done">
+        <input type="checkbox" id="done-@Model.ID" name="done" checked="@Model.Done">
     </div>
     <form id="addCheckListItemForm" asp-action="Delete" asp-controller="CheckListItem" method="delete">
         <input type="hidden" name="id" value="@Model.ID" />
@@ -13,22 +13,52 @@
         </span>
     </form>
     <script>
+        document.getElementById("done-" + @Model.ID).addEventListener("change", (event) => {
+
+            if (event.target.checked) {
+                var done = true;
+            } else {
+                var done = false;
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", window.location.origin + "/api/updateCheckListItem");
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                id: @Model.ID,
+                text: document.getElementById("text-" + @Model.ID).value,
+                done: done
+            }));
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState != 4) return;
+                if (this.status == 401) {
+                    // If resonse was not OK, display error
+                    window.alert("Something went wrong");
+                }
+            };
+        });
+
         document.getElementById("text-" + @Model.ID).addEventListener("blur", (event) => {
+            // If the text is unchanged, do nothing
+            if (event.currentTarget.value == "@Model.Text") {
+                return;
+            }
+
+            // If the field becomes empty, reset it
+            if (!event.currentTarget.value) {
+                event.currentTarget.value = "@Model.Text";
+                return;
+            }
 
             if (event.target.parentNode.childNodes[3].checked) {
                 var done = true;
             } else {
                 var done = false;
             }
-            console.log(event.target.parentNode.childNodes[3].checked);
+             
             var xhr = new XMLHttpRequest();
             xhr.open("POST", window.location.origin + "/api/updateCheckListItem");
             xhr.setRequestHeader('Content-Type', 'application/json');
-            console.log(JSON.stringify({
-                id: @Model.ID,
-                text: event.currentTarget.value,
-                done: done
-            }));
             xhr.send(JSON.stringify({
                 id: @Model.ID,
                 text: event.currentTarget.value,
@@ -37,10 +67,7 @@
 
             xhr.onreadystatechange = function () {
                 if (this.readyState != 4) return;
-
-                if (this.status == 200) {
-                    location.reload();
-                } if (this.status == 401) {
+                if (this.status == 401) {
                     // If resonse was not OK, display error
                     window.alert("Something went wrong");
                 }

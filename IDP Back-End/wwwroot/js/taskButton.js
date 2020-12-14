@@ -45,9 +45,16 @@ function newTask(list) {
 
             if (this.status == 200) {
                 location.reload();
-            } if (this.status == 401) {
-                // If resonse was not OK, display error
-                window.alert("Something went wrong");
+            } if (this.status == 400) {
+                // If resonse was abou user delete token, navigate to login
+                if (this.statusText == "User was not found! Please log in again!") {
+                    windo.alert(this.statusText)
+                    window.localStorage.removeItem("currentUser");
+                    window.location.href = window.location.origin + "/login"
+                } else {
+                    // If it was something else, notify the user
+                    window.alert("Something went wrong");
+                }
             }
         };
     });

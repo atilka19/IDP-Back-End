@@ -10,12 +10,11 @@ namespace IDP_Back_End.Repository.Interface
         // READ
         Task GetTaskByID(int ID);
         // CREATE
-        Task CreateTask(string title, string description, int categoryID, string createdBy, string taskOf);
-        Task AddNewTask(string title, string createdBy, string categoryName);
+        void AddNewTask(string title, string createdBy, string categoryName);
         Task AddUserToTask(int id, string taskOf);
 
         // UPDATE
-        void UpdateTaskCategory(int taskID, string category);
+        Task UpdateTaskCategory(int taskID, string category);
         void UpdateTask(int ID, string newTitle, string newDescription, bool done);
 
         // DELETE

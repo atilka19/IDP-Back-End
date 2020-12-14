@@ -101,6 +101,7 @@ namespace IDP_Back_End
                 {
                     var ctx = scope.ServiceProvider.GetService<DBContext>();
                     ctx.Database.EnsureCreated();
+                    DBInit.SeedDB(ctx);
                 }
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();

@@ -32,17 +32,23 @@ namespace IDP_Back_End.Controllers
 
         public IActionResult TaskById(int taskID)
         {
-            var task = _taskRepo.GetTaskByID(taskID);
-            return View("PartialViews/_SingleTaskView", task);
+            return View("PartialViews/_SingleTaskView", _taskRepo.GetTaskByID(taskID));
         }
 
         // GET: TasksController/Create
         [HttpPost]
         [Route("api/addTask")]
-        public IActionResult AddTask([FromBody] TaskInputModel input)
+        public ActionResult AddTask([FromBody] TaskInputModel input)
         {
-            var task = _taskRepo.AddNewTask(input.Title, input.Username, input.CategoryName);
-            return View("PartialViews/_SingleTaskView", task);
+            try
+            {
+                _taskRepo.AddNewTask(input.Title, input.Username, input.CategoryName);
+                return StatusCode(200, Ok());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(400, e.Message);
+            }
         }
         [HttpPost]
         [Route("api/updateCheckListItem")]
@@ -50,38 +56,51 @@ namespace IDP_Back_End.Controllers
         {
             try
             {
-                var task = _checkListRepo.UpdateCheckListItem(item.Id, item.Text, item.Done);
-                return View("PartialViews/_SingleTaskView", task);
+                _checkListRepo.UpdateCheckListItem(item.Id, item.Text, item.Done);
+                return StatusCode(200, Ok());
 
             } catch(Exception e) 
             {
-                throw e;
+                return StatusCode(400, e.Message);
             }
         }
 
         // GET: TasksController/Create
         public IActionResult AddUserToTask(int taskId, string username)
         {
-            var task = _taskRepo.AddUserToTask(taskId, username);
-            return View("PartialViews/_SingleTaskView", task);
+            return View("PartialViews/_SingleTaskView", _taskRepo.AddUserToTask(taskId, username));
         }
 
         // GET: TasksController/Create
         public IActionResult AddCommentToTask(int taskId, string text, string username)
         {
-            var task = _commentRepo.CreateCommentAddToTask(taskId, text, username);
-            return View("PartialViews/_SingleTaskView", task);
+            return View("PartialViews/_SingleTaskView", _commentRepo.CreateCommentAddToTask(taskId, text, username));
         }
 
         // GET: TasksController/Create
         public IActionResult AddCheckListToTask(int taskId, string text)
         {
-            var task = _checkListRepo.CreateNewListItemAddToTask(taskId, text);
-            return View("PartialViews/_SingleTaskView", task);
+            return View("PartialViews/_SingleTaskView", _checkListRepo.CreateNewListItemAddToTask(taskId, text));
+        }
+
+        // GET: TasksController/Create
+        [HttpPost]
+        [Route("api/changeTaskCategory")]
+        public IActionResult ChangeTaskCategory([FromBody] UpdateCategoryModel model)
+        {
+            try
+            {
+                _taskRepo.UpdateTaskCategory(model.taskId, model.newCategoryName);
+                return StatusCode(200, Ok());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(400, e.Message);
+            }
         }
 
         // GET: TasksController/Edit/5
-        public RedirectToActionResult EditTask(int ID, string newTitle, string newDescription, bool done)
+        public IActionResult EditTask(int ID, string newTitle, string newDescription, bool done)
         {
             _taskRepo.UpdateTask(ID, newTitle, newDescription, done);
             return RedirectToAction("Index", "Home", new { area = "" });
