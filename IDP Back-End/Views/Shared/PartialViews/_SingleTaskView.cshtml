@@ -60,6 +60,7 @@
                         </span>
                     </div>
                     <script>
+                        // Script used to get saved username and append it to the form
                         document.getElementById('addCommentForm').onsubmit = function () {
                             var txt = document.getElementById('username');
                             var token = JSON.parse(localStorage.getItem('currentUser'));
