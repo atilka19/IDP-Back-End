@@ -89,15 +89,13 @@ function register(form) {
 
     xhr.onreadystatechange = function () {
         if (this.readyState != 4) return;
-
-        if (this.status == 200) {
-
-            // If response was OK, tell user, navigate to login page
-            window.alert("Register Successful! Please log in.");
-            window.location.href = window.location.origin + "/login"
-        } if (this.status == 401) {
-            // If resonse was not OK, display error
-            window.alert("Username is already taken!");
+        console.log(xhr.responseText)
+        // If error was because of a corrupt token, tell user, remove token, navigate to login page
+        if (xhr.responseText == "Password must be between 6 and 20 characters." || xhr.responseText == "Password must contain atleast 1 number and letter.") {
+            window.alert(xhr.responseText)
+        } else {
+            // If it was something else, notify the user
+            window.alert("Something went wrong");
         }
     };
 }
