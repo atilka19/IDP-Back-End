@@ -3,7 +3,7 @@
 
 <div class="row" style="margin: 10px;">
     <div class="checklist-item">
-        <input id="text-@Model.ID" style="width: 70px; overflow: hidden; white-space: nowrap;" value="@Model.Text">
+        <input id="text-@Model.ID" style="width: 270px; overflow: hidden; white-space: nowrap;" value="@Model.Text">
         <input type="checkbox" id="done-@Model.ID" name="done" checked="@Model.Done">
     </div>
     <form id="addCheckListItemForm" asp-action="Delete" asp-controller="CheckListItem" method="delete">
