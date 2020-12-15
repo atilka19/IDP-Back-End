@@ -14,18 +14,11 @@
     </form>
     <script>
         document.getElementById("done-" + @Model.ID).addEventListener("change", (event) => {
-
             // Convert checked value to boolean
             if (event.target.checked) {
                 var done = true;
             } else {
-                var done = false;
-            }
-
-            // If the change made matches the saved data somehow, do nothing
-            // Should never happen
-            if (done == @Model.Done) {
-                return;
+                done = false;
             }
 
             var xhr = new XMLHttpRequest();
